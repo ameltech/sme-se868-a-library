@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map for SE868-AS
+#######################################
+
+#######################################
+# Library (KEYWORD3)
+#######################################
+smeGps	     KEYWORD3
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	            KEYWORD2
+setStandby      	KEYWORD2
+setWarmRestart  	KEYWORD2
+ready            	KEYWORD2
+getAltitude	        KEYWORD2
+getLatitude	        KEYWORD2
+getLongitude	    KEYWORD2
+getLockedSatellites	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
