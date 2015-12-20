@@ -2,7 +2,7 @@
  * smeErrorCode.h
  *
  * Created: 5/4/2015 8:48:34 PM
- *  Author: speirano
+ * Author : Seve (seve@axelelettronica.it)
  */
 
 

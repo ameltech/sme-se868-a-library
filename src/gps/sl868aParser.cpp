@@ -2,7 +2,7 @@
  * sl868aParser.cpp
  *
  * Created: 06/05/2015 22:48:50
- *  Author: speirano
+ * Author : Seve (seve@axelelettronica.it)
  */
 #include <Arduino.h>
 #include "sl868a.h"

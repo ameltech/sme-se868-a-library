@@ -8,7 +8,7 @@
     This information is useful to well understand the accuracy of the localization information
 
     created 27 May 2015
-    by Seve (speirano@amel-tech.com)
+    by Seve (seve@axelelettronica.it)
 
     This example is in the public domain
     https://github.com/ameltech

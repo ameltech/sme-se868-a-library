@@ -2,7 +2,7 @@
  * sl868aParser.h
  *
  * Created: 06/05/2015 22:48:14
- *  Author: speirano
+ * Author : Seve (seve@axelelettronica.it)
  */
 
 

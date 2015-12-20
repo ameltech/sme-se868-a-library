@@ -2,7 +2,7 @@
  * sl868aModel.h
  *
  * Created: 05/05/2015 22:26:00
- *  Author: speirano
+ * Author : Seve (seve@axelelettronica.it)
  */
 
 
