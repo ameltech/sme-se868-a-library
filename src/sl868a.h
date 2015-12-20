@@ -2,7 +2,7 @@
  * sl868a.h
  *
  * Created: 05/05/2015 22:14:39
- *  Author: speirano
+ * Author : Seve (seve@axelelettronica.it)
  */
 
 
@@ -73,6 +73,8 @@ public:
     void begin (void);
     void setStandby();
     void setWarmRestart();
+    void setHotRestart();
+    void setColdRestart();
     const bool ready(void);
     unsigned int getAltitude();
     double getLatitude();

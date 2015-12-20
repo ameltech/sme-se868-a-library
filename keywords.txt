@@ -17,6 +17,8 @@ smeGps	     KEYWORD3
 begin	            KEYWORD2
 setStandby      	KEYWORD2
 setWarmRestart  	KEYWORD2
+setHotRestart   	KEYWORD2
+setColdRestart   	KEYWORD2
 ready            	KEYWORD2
 getAltitude	        KEYWORD2
 getLatitude	        KEYWORD2

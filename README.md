@@ -1,5 +1,5 @@
-SmartEverything Telit SE868-AS GPS System
-=============================================================
+# SmartEverything Telit SE868-AS GPS System
+----
 
 This is a library for the ST VL6180X component.
 
@@ -37,22 +37,28 @@ An external or host memory is required to store the Ephemeris files.
 It was principally designed to work with the SmartEverything board, but could
 be easily adapt and use on every Arduino and Arduino Certified boards.
 
-Written by Seve <speirano@amel-tech.com>.
+Written by Seve <seve@axelelettronica.it>.
 
-Repository Contents
+## Repository Contents
 -------------------
-
 * **/examples** - Example sketches for the library (.ino). Run these from the Arduino IDE.
 * **/src** - Source files for the library (.cpp, .h).
 * **library.properties** - General library properties for the Arduino package manager.
 
-Documentation
+## Releases  
+---  
+#### v1.0.0 First Release  
+#### v1.0.1 Second Release 19-Dec-2015  
+* Fixed Issue:<br>  
+    Added examples and API to trigger GPS module power status. This can be useful to reduce power consumption<br>.  
+ 
+## Documentation
 --------------
 
 * **[Installing an Arduino Library Guide](http://www.arduino.cc/en/Guide/Libraries#toc3)** - How to install a SmartEverything library on the Arduino IDE using the Library Manager
 
 
-License Information
+## License Information
 -------------------
 
 Copyright (c) Amel Technology. All right reserved.

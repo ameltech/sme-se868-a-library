@@ -2,7 +2,7 @@
  * sl868a.cpp
  *
  * Created: 05/05/2015 22:15:38
- *  Author: speirano
+ * Author : Seve (seve@axelelettronica.it)
  */
  #include <Arduino.h>
  #include "sl868a.h"
@@ -19,6 +19,7 @@ Sl868a::setStandby(void)
 {
      // set GPS in standby
      print(SL868A_SET_STDBY_CMD);
+     _ready = false;
 }
 
  void
@@ -26,8 +27,26 @@ Sl868a::setStandby(void)
  {
       // Power On the GPS module
      print(SL868A_WARM_RST_CMD);
+     _ready = false;
  }
 
+void
+Sl868a::setHotRestart(void)
+{
+     // Hot Power On the GPS module
+     print(SL868A_HOT_RST_CMD);
+     _ready = false;
+}
+
+ void
+ Sl868a::setColdRestart(void)
+ {
+      // Cold Power On the GPS module
+     print(SL868A_COLD_RST_CMD);
+     _ready = false;
+     cold_boot = true;
+ }
+ 
  void
  Sl868a::processGpsRxMsg(void)
  {
