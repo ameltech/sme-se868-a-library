@@ -37,7 +37,6 @@ An external or host memory is required to store the Ephemeris files.
 It was principally designed to work with the SmartEverything board, but could
 be easily adapt and use on every Arduino and Arduino Certified boards.
 
-Written by Seve <seve@axelelettronica.it>.
 
 ## Repository Contents
 -------------------
