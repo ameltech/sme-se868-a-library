@@ -1,5 +1,5 @@
 /*
-    SmeGPS Library - Localization Information
+    SmeGPS Library - Power modes
 
     This example shows how to trigger the GPS module power status:
     Standby, Warm, Cold and Hot restarts.
@@ -36,7 +36,7 @@ typedef enum   {
 
 const unsigned char LOOP_DELAY     = 5;   // 5 ms
 const unsigned int  MS_IN_S        = 1000;
- 
+
 const unsigned int  PRINT_PERIOD   = 2*(MS_IN_S)/LOOP_DELAY; // 2 sec  
 
 gpsStatus_t gpsStatus = GPS_HOT;
@@ -45,14 +45,14 @@ gpsStatus_t gpsStatus = GPS_HOT;
 #define checkToPrint(loop)  ((loop%PRINT_PERIOD) == 0)
 
 
-    
+
 // the setup function runs once when you press reset or power the board
 void setup() {
     SerialUSB.begin(115200);
     smeGps.begin();
 
     while (!SerialUSB) {
-       ;
+        ;
     }
 
     SerialUSB.println("Press one of the following keys to change Power Status:");
@@ -68,7 +68,7 @@ void printGpsData(void)
     double latitude                = smeGps.getLatitude();
     double longitude               = smeGps.getLongitude();
     unsigned char lockedSatellites = smeGps.getLockedSatellites();
-    
+
     SerialUSB.println(" ");
     SerialUSB.print("Latitude    =  ");
     SerialUSB.println(latitude, 6);
@@ -93,37 +93,45 @@ void loop()
 
         switch (inChar) {
         case 's':  gpsStatus = GPS_STANDBY;
-            SerialUSB.println("Set GPS to Standby...");
-            smeGps.setStandby();
-            ledBlueLight(HIGH);
-            delay(500);
-            ledBlueLight(LOW);
+        SerialUSB.println("Set GPS to Standby...");
+        smeGps.setStandby();
+#ifdef ARDUINO_SAMD_SMARTEVERYTHING
+        ledBlueLight(HIGH);
+        delay(500);
+        ledBlueLight(LOW);
+#endif
         break;
         case 'h':  gpsStatus = GPS_HOT;
-		        SerialUSB.println("GPS Hot Restart...");
-            smeGps.setHotRestart();
-            ledBlueLight(HIGH);
-            ledRedLight(HIGH);
-            delay(500);
-            ledBlueLight(LOW);
-            ledRedLight(LOW);
+        SerialUSB.println("GPS Hot Restart...");
+        smeGps.setHotRestart();
+#ifdef ARDUINO_SAMD_SMARTEVERYTHING
+        ledBlueLight(HIGH);
+        ledRedLight(HIGH);
+        delay(500);
+        ledBlueLight(LOW);
+        ledRedLight(LOW);
+#endif
         break;
         case 'w':  gpsStatus = GPS_WARM;
-            SerialUSB.println("GPS Warm Restart...");
-            smeGps.setWarmRestart();
-            ledGreenLight(HIGH);
-            delay(500);
-            ledGreenLight(LOW);
+        SerialUSB.println("GPS Warm Restart...");
+        smeGps.setWarmRestart();
+#ifdef ARDUINO_SAMD_SMARTEVERYTHING
+        ledGreenLight(HIGH);
+        delay(500);
+        ledGreenLight(LOW);
+#endif
         break;
         case 'c':  gpsStatus = GPS_COLD;
-            SerialUSB.println("GPS Cold Restart...");
-            smeGps.setColdRestart();
-            ledRedLight(HIGH);
-            delay(500);
-            ledRedLight(LOW);
+        SerialUSB.println("GPS Cold Restart...");
+        smeGps.setColdRestart();  
+#ifdef ARDUINO_SAMD_SMARTEVERYTHING
+        ledRedLight(HIGH);
+        delay(500);
+        ledRedLight(LOW);
+#endif
         break;
         default:
-        break;
+            break;
         }
     } 
 
