@@ -46,7 +46,7 @@ be easily adapt and use on every Arduino and Arduino Certified boards.
 
 ## Releases  
 ---  
-#### v1.2.0 Second Release 18-Jul-2016
+#### v1.1.0 Third Release 18-Jul-2016
 * Enachement:  
     Unlocked the library from the SME specific UART. The User can change the serial at the begin() method.<br>
 
