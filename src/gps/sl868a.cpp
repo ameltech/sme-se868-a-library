@@ -111,7 +111,7 @@ Sl868a::setHotRestart(void)
  int
  Sl868a::print(const char *msg)
  {
-    GPS.print((const char*)msg);
+    gpsComm->print((const char*)msg);
     return SME_OK;
  }
 
@@ -119,9 +119,9 @@ Sl868a::setHotRestart(void)
  void
  Sl868a::readData(void)
  {
-     while (GPS.available()) {
+     while (gpsComm->available()) {
          // get the new byte:
-         char inChar = (char)GPS.read();
+         char inChar = (char)gpsComm->read();
          handleGpsRxData(inChar);
      }
  }
@@ -141,8 +141,9 @@ Sl868a::setHotRestart(void)
      _ready = false;
  }
 
- void Sl868a::begin (void) {
-     GPS.begin(9600);
+ void Sl868a::begin (Uart *serial) {
+     this->gpsComm = serial;
+     gpsComm->begin(9600);
  }
 
 

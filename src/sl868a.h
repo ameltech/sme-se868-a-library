@@ -36,6 +36,7 @@ public:
     virtual ~Sl868a(){};
 
 private:
+    Uart *gpsComm;
     bool crcCheck(uint8_t data[], uint8_t len);
     uint8_t handleGpsRxData(uint8_t inChar);
     void parseGpsRxMsg (void);
@@ -70,7 +71,13 @@ private:
 // library API
 public:
 
-    void begin (void);
+    #ifdef ARDUINO_SAMD_SMARTEVERYTHING
+    void begin(Uart *serial=&GPS);
+    #elif defined (ASME3_REVISION)
+    void begin(Uart *serial=&GPS);
+    #else
+    void begin(Uart *serial=&Serial1);
+    #endif
     void setStandby();
     void setWarmRestart();
     void setHotRestart();

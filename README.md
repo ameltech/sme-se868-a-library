@@ -46,11 +46,16 @@ be easily adapt and use on every Arduino and Arduino Certified boards.
 
 ## Releases  
 ---  
-#### v1.0.0 First Release  
+#### v1.1.0 Third Release 18-Jul-2016
+* Enachement:  
+    Unlocked the library from the SME specific UART. The User can change the serial at the begin() method.<br>
+
 #### v1.0.1 Second Release 19-Dec-2015  
-* Fixed Issue:<br>  
-    Added examples and API to trigger GPS module power status. This can be useful to reduce power consumption<br>.  
- 
+* Fixed Issue:  
+    Added examples and API to trigger GPS module power status. This can be useful to reduce power consumption<br>.
+
+#### v1.0.0 First Release  
+
 ## Documentation
 --------------
 
