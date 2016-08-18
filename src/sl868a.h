@@ -26,6 +26,16 @@ typedef struct {
     uint16_t altitude;
     uint8_t  quality;
     uint8_t  n_satellites;
+	// add time data here below Gabriel de Fombelle (gabriel@line-up.io)
+	uint8_t utc_hour;
+	uint8_t utc_min;
+	uint8_t utc_sec;
+	uint16_t utc_sec_decimals;
+	uint16_t utc_year;
+	uint8_t utc_month;
+	uint8_t utc_dayOfMonth;
+	double speed_knots;
+	double course;
 }sl868aCachedDataT;
 
 
@@ -58,6 +68,7 @@ private:
     uint8_t * sl868a_parse_param_offset(uint8_t in[], uint8_t in_len, uint8_t comma_num);
     void sme_parse_coord(uint8_t in[], uint8_t in_len, sme_coord_t type);
     void sl868a_parse_gga(uint8_t in[], uint8_t in_len);
+	void sl868a_parse_rmc(uint8_t in[], uint8_t in_len);
     void readData(void);
     int print(const char *msg);
     sl868aCachedDataT & getChachedDataPtr() {return _data;}
@@ -86,9 +97,19 @@ public:
     unsigned int getAltitude();
     double getLatitude();
     double getLongitude();
-
-
     unsigned char getLockedSatellites();
+	// getters added by gabriel
+	unsigned int getUtcHour();
+	unsigned int getUtcMinute();
+	unsigned int getUtcSecond();
+	unsigned int getUtcSecondDecimals();
+	unsigned int getUtcYear();
+	unsigned char getUtcMonth();
+	unsigned char getUtcDayOfMonth();
+	double getSpeedKnots();
+	double getCourse();
+	sl868aCachedDataT getData();
+
 };
 
 
