@@ -75,7 +75,7 @@ void loop() {
         utc_dayOfMonth = smeGps.getUtcDayOfMonth();
         speed_knots = smeGps.getSpeedKnots();
         course = smeGps.getCourse();
-        // get cached data
+        // get raw cached data as a sl868aCachedDataT struct
         data = smeGps.getData();
 
         if ((loop_cnt % 200) == 0) {
@@ -108,7 +108,7 @@ void loop() {
             SerialUSB.print("Speek (knots) = ");
             SerialUSB.println(speed_knots, DEC);
             SerialUSB.print("Course = ");
-            SerialUSB.println(data.course, DEC);
+            SerialUSB.println(course, DEC);
  
         }
     } else {

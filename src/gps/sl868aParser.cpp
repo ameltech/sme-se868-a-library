@@ -3,6 +3,9 @@
  *
  * Created: 06/05/2015 22:48:50
  * Author : Seve (seve@axelelettronica.it)
+  * Modified 06/09/2016
+ * Author Gabriel (gabriel.de.fombelle@gmail.com)
+ * provide UTC time and date, speed and course
  */
 #include <Arduino.h>
 #include "sl868a.h"
@@ -224,6 +227,7 @@ Sl868a::sl868a_parse_gga(uint8_t in[], uint8_t in_len)
     uint8_t comma_alt = 9; // n. ',' before alt data
     uint8_t comma_nsat = 7;
     uint8_t comma_quality = 6;
+	uint8_t comma_utc = 1;
     uint8_t *ptr;
     sl868aCachedDataT &gpsRxData = smeGps.getChachedDataPtr();
     ptr = sl868a_parse_param_offset(in, in_len, comma_quality);
@@ -245,6 +249,31 @@ Sl868a::sl868a_parse_gga(uint8_t in[], uint8_t in_len)
         gpsRxData.altitude = (gpsRxData.altitude *10) + (*ptr -'0'); // uint16_t
         ptr++;
     }
+	// utc
+    
+    ptr = sl868a_parse_param_offset(in, in_len, comma_utc);
+    gpsRxData.utc_hour = 0;
+    gpsRxData.utc_min = 0;
+    gpsRxData.utc_sec = 0;
+    gpsRxData.utc_sec_decimals = 0;
+    unsigned char _cursor = 0;
+    while (ptr &&  (*ptr != ',')) {
+        if(_cursor<=1){
+          gpsRxData.utc_hour = (gpsRxData.utc_hour *10) + (*ptr -'0');
+        }
+        if(_cursor>=2 &&_cursor <=3){
+           gpsRxData.utc_min = (gpsRxData.utc_min *10) + (*ptr -'0');
+        }
+        if(_cursor >=4 && _cursor<=5){
+            gpsRxData.utc_sec = (gpsRxData.utc_sec *10) + (*ptr -'0');         
+        }
+        if(_cursor>=7 && _cursor<=8){
+            gpsRxData.utc_sec_decimals = (gpsRxData.utc_sec_decimals *10) + (*ptr -'0');         
+ 
+        }
+        _cursor++;
+        ptr++;
+    } 
 
     if (!_ready && gpsRxData.quality) {
         _ready = true;

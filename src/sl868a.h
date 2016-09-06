@@ -3,6 +3,9 @@
  *
  * Created: 05/05/2015 22:14:39
  * Author : Seve (seve@axelelettronica.it)
+ * Modified 06/09/2016
+ * Author Gabriel (gabriel.de.fombelle@gmail.com)
+ * provide UTC time and date, speed and course
  */
 
 
@@ -14,6 +17,9 @@
 
 #define LAT_LONG_DEC_UNIT 1000000
 
+// ****** FOR DEBUG PURPOSE ONLY *******
+ #define ARDUINO_SAMD_SMARTEVERYTHING 1;
+// *************************************
 
 
 typedef struct {
