@@ -17,10 +17,6 @@
 
 #define LAT_LONG_DEC_UNIT 1000000
 
-// ****** FOR DEBUG PURPOSE ONLY *******
-// #define ARDUINO_SAMD_SMARTEVERYTHING 1;
-// *************************************
-
 
 typedef struct {
     uint16_t  lat_deg;
