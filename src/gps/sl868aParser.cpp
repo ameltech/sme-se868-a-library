@@ -3,6 +3,9 @@
  *
  * Created: 06/05/2015 22:48:50
  * Author : Seve (seve@axelelettronica.it)
+  * Modified 06/09/2016
+ * Author Gabriel (gabriel.de.fombelle@gmail.com)
+ * provide UTC time and date, speed and course
  */
 #include <Arduino.h>
 #include "sl868a.h"
@@ -224,6 +227,7 @@ Sl868a::sl868a_parse_gga(uint8_t in[], uint8_t in_len)
     uint8_t comma_alt = 9; // n. ',' before alt data
     uint8_t comma_nsat = 7;
     uint8_t comma_quality = 6;
+	uint8_t comma_utc = 1;
     uint8_t *ptr;
     sl868aCachedDataT &gpsRxData = smeGps.getChachedDataPtr();
     ptr = sl868a_parse_param_offset(in, in_len, comma_quality);
@@ -245,12 +249,105 @@ Sl868a::sl868a_parse_gga(uint8_t in[], uint8_t in_len)
         gpsRxData.altitude = (gpsRxData.altitude *10) + (*ptr -'0'); // uint16_t
         ptr++;
     }
+	// utc
+    
+    ptr = sl868a_parse_param_offset(in, in_len, comma_utc);
+    gpsRxData.utc_hour = 0;
+    gpsRxData.utc_min = 0;
+    gpsRxData.utc_sec = 0;
+    gpsRxData.utc_sec_decimals = 0;
+    unsigned char _cursor = 0;
+    while (ptr &&  (*ptr != ',')) {
+        if(_cursor<=1){
+          gpsRxData.utc_hour = (gpsRxData.utc_hour *10) + (*ptr -'0');
+        }
+        if(_cursor>=2 &&_cursor <=3){
+           gpsRxData.utc_min = (gpsRxData.utc_min *10) + (*ptr -'0');
+        }
+        if(_cursor >=4 && _cursor<=5){
+            gpsRxData.utc_sec = (gpsRxData.utc_sec *10) + (*ptr -'0');         
+        }
+        if(_cursor>=7 && _cursor<=8){
+            gpsRxData.utc_sec_decimals = (gpsRxData.utc_sec_decimals *10) + (*ptr -'0');         
+ 
+        }
+        _cursor++;
+        ptr++;
+    } 
 
     if (!_ready && gpsRxData.quality) {
         _ready = true;
     }
 }
 
+void
+Sl868a::sl868a_parse_rmc(uint8_t in[], uint8_t in_len)
+{
+	uint8_t comma_speed = 7; // n. ',' before alt data
+	uint8_t comma_course = 8;
+	uint8_t comma_date = 9;
+	uint8_t *ptr;
+	sl868aCachedDataT &gpsRxData = smeGps.getChachedDataPtr();
+
+	// utc date
+	gpsRxData.utc_year = 0;
+	gpsRxData.utc_month = 0;
+	gpsRxData.utc_dayOfMonth = 0;
+	gpsRxData.speed_knots = 0;
+	gpsRxData.course = 0;
+	
+	ptr = sl868a_parse_param_offset(in, in_len, comma_date);
+	unsigned char _cursor = 0;
+	while (ptr &&  (*ptr != ',')) {
+		if(_cursor<=1){
+			gpsRxData.utc_dayOfMonth = (gpsRxData.utc_dayOfMonth *10) + (*ptr -'0');
+		}
+		if(_cursor>=2 &&_cursor <=3){
+			gpsRxData.utc_month = (gpsRxData.utc_month *10) + (*ptr -'0');
+		}
+		if(_cursor >=4 && _cursor<=5){
+			gpsRxData.utc_year = (gpsRxData.utc_year *10) + (*ptr -'0');
+		}
+		
+		_cursor++;
+		ptr++;
+	}
+	gpsRxData.utc_year+=2000;
+	
+	ptr = sl868a_parse_param_offset(in, in_len, comma_speed);
+	_cursor = 0;
+	bool decimal = false;
+	int decimalPart=0;
+	int precision = 0;
+	while (ptr &&  (*ptr != ',')) {
+		if(!decimal && *ptr=='.') decimal = true;
+		if (!decimal)
+		gpsRxData.speed_knots = (gpsRxData.speed_knots *10) + (*ptr -'0');
+		else{
+			decimalPart = (decimalPart * 10) + (*ptr -'0');
+			precision++;
+		}
+		ptr++;
+	}
+	gpsRxData.speed_knots+= decimalPart/ pow(10,precision);
+
+	ptr = sl868a_parse_param_offset(in, in_len, comma_course);
+	decimal = false;
+	decimalPart=0;
+	precision = 0;
+	while (ptr &&  (*ptr != ',')) {
+		if(!decimal && *ptr=='.') decimal = true;
+		if (!decimal)
+		gpsRxData.course = (gpsRxData.course *10) + (*ptr -'0');
+		else{
+			decimalPart = (decimalPart * 10) + (*ptr -'0');
+			precision++;
+		}
+		ptr++;
+	}
+	gpsRxData.course+= decimalPart/ pow(10,precision);
+
+}
 
 
  bool

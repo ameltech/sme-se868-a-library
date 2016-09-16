@@ -63,6 +63,8 @@ Sl868a::setHotRestart(void)
              case NMEA_RMC:
              sme_parse_coord(msgPtrT.nmea_p.std_p.data_p, msgPtrT.nmea_p.std_p.dataLenght, SME_LAT);
              sme_parse_coord(msgPtrT.nmea_p.std_p.data_p, msgPtrT.nmea_p.std_p.dataLenght, SME_LONG);
+			 sl868a_parse_rmc(msgPtrT.nmea_p.std_p.data_p, msgPtrT.nmea_p.std_p.dataLenght);
+			              
              break;
 
              case NMEA_GGA:
@@ -234,5 +236,47 @@ Sl868a::getLockedSatellites()
     return _data.n_satellites;
 }
 
+// additional getters UTC speed here
+unsigned int Sl868a::getUtcHour(){
+	readData();
+	return _data.utc_hour;
+}
+unsigned int Sl868a::getUtcMinute(){
+	readData();
+	return _data.utc_min;
+}
+unsigned int Sl868a::getUtcSecond(){
+	readData();
+	return _data.utc_sec;
+}
 
+unsigned int Sl868a::getUtcSecondDecimals(){
+	readData();
+	return _data.utc_sec_decimals;
+}
+
+unsigned int Sl868a::getUtcYear(){
+	readData();
+	return _data.utc_year;
+}
+unsigned char Sl868a::getUtcMonth(){
+	readData();
+	return _data.utc_month;
+}
+unsigned char Sl868a::getUtcDayOfMonth(){
+	readData();
+	return _data.utc_dayOfMonth;
+}
+double Sl868a::getSpeedKnots(){
+	readData();
+	return _data.speed_knots >0 ? _data.speed_knots :0;
+}
+double Sl868a::getCourse(){
+	readData();
+	return _data.course >0 ? _data.course:0;
+}
+sl868aCachedDataT Sl868a::getData(){
+	readData();
+	return _data;
+}
 Sl868a  smeGps;
