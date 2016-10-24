@@ -1,7 +1,7 @@
 # SmartEverything Telit SE868-AS GPS System
 ----
 
-This is a library for the ST VL6180X component.
+This is a library for the Telit SE868-AS component.
 
 The SE868-AS is a GPS Smart antenna module featuring an embedded antenna
 with an optimized RF path and standard SMT mounting.
