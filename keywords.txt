@@ -14,17 +14,27 @@ smeGps	     KEYWORD3
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-begin	            KEYWORD2
-setStandby      	KEYWORD2
-setWarmRestart  	KEYWORD2
-setHotRestart   	KEYWORD2
-setColdRestart   	KEYWORD2
-ready            	KEYWORD2
-getAltitude	        KEYWORD2
-getLatitude	        KEYWORD2
-getLongitude	    KEYWORD2
-getLockedSatellites	KEYWORD2
-
+begin	             KEYWORD2
+setStandby           KEYWORD2
+setWarmRestart       KEYWORD2
+setHotRestart        KEYWORD2
+setColdRestart       KEYWORD2
+ready                KEYWORD2
+getAltitude	         KEYWORD2
+getLatitude	         KEYWORD2
+getLongitude	     KEYWORD2
+getLockedSatellites  KEYWORD2
+getUtcHour           KEYWORD2
+getUtcMinute         KEYWORD2
+getUtcSecond         KEYWORD2
+getUtcSecondDecimals KEYWORD2
+getUtcYear           KEYWORD2
+getUtcMonth          KEYWORD2
+getUtcDayOfMonth     KEYWORD2
+getSpeedKnots        KEYWORD2
+getCourse            KEYWORD2
+getData              KEYWORD2
+    
 #######################################
 # Constants (LITERAL1)
 #######################################

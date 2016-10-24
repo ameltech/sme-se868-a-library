@@ -4,13 +4,12 @@
  * Created: 05/05/2015 22:15:38
  * Author : Seve (seve@axelelettronica.it)
  */
-#include <Uart.h>
-#include <Arduino.h>
- 
-#include "sl868a.h"
-#include "sl868aModel.h"
-#include "sl868aParser.h"
-#include "smeErrorCode.h"
+ #include <Arduino.h>
+ #include "sl868a.h"
+ #include <Uart.h>
+ #include "sl868aModel.h"
+ #include "sl868aParser.h"
+ #include "smeErrorCode.h"
 
 
 static bool cold_boot = true;
@@ -144,8 +143,7 @@ Sl868a::setHotRestart(void)
   }
 
  Sl868a::Sl868a(void){
-     _ready  = false;
-     _fixing = false;
+     _ready = false;
  }
 
  void Sl868a::begin (Uart *serial) {
