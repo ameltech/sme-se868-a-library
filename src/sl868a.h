@@ -83,7 +83,7 @@ private:
 // library API
 public:
 
-#ifdef ARDUINO_SAMD_SMARTEVERYTHING
+#ifdef ARDUINO_SAMD_SMARTEVERYTHING_FOX
     void begin(Uart *serial=&GPS);
 #elif defined (ASME3_REVISION)
     void begin(Uart *serial=&GPS);

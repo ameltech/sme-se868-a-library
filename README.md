@@ -45,6 +45,9 @@ be easily adapt and use on every Arduino and Arduino Certified boards.
 * **library.properties** - General library properties for the Arduino package manager.
 
 ## Releases  
+#### v1.1.1 Third Release 04-Jan-2017
+* Fixed Issue:<br>
+    Compatibility with Fox1
 ---  
 #### v1.1.0 Third Release 18-Jul-2016
 * Enachement:  
